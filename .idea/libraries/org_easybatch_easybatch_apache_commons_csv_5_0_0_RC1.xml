@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.easybatch:easybatch-apache-commons-csv:5.0.0-RC1" type="repository">
+    <properties maven-id="org.easybatch:easybatch-apache-commons-csv:5.0.0-RC1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/easybatch/easybatch-apache-commons-csv/5.0.0-RC1/easybatch-apache-commons-csv-5.0.0-RC1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/easybatch/easybatch-core/5.0.0-RC1/easybatch-core-5.0.0-RC1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-csv/1.4/commons-csv-1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
