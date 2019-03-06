@@ -81,8 +81,8 @@ public class USGSDatabase {
 
             String createTableSql =" CREATE TABLE " + tableName +
                     "(time  VARCHAR(50), " +
-                    " latitude VARCHAR (50), " +
-                    " longitude VARCHAR (50), " +
+                    " latitude DECIMAL (5,3), " +
+                    " longitude DECIMAL (5,3), " +
                     " depth DECIMAL(6,2), " +
                     " mag DECIMAL(6,2), " +
                     " magType VARCHAR (50), " +
