@@ -27,8 +27,8 @@ public class USGSDatabase {
 
             createTable(conn,"earthquake_data");
 
-            //readCSV1(conn,"earthquake_data", "/home/ayush/Downloads/2007-2017_large_quake.csv");
-            loadData(conn,"earthquake_data", "S:\\Dev\\JAVA III\\Lab4\\2007-2017_large_quake.csv");
+//            loadData(conn,"earthquake_data", "S:\\Dev\\JAVA III\\Lab4\\2007-2017_large_quake.csv");
+            loadData(conn,"earthquake_data", "2007-2017_large_quake.csv");
 
             conn.close();
 
@@ -81,8 +81,8 @@ public class USGSDatabase {
 
             String createTableSql =" CREATE TABLE " + tableName +
                     "(time  VARCHAR(50), " +
-                    " latitude DECIMAL (5,3), " +
-                    " longitude DECIMAL (5,3), " +
+                    " latitude DECIMAL (7,4), " +
+                    " longitude DECIMAL (7,4), " +
                     " depth DECIMAL(6,2), " +
                     " mag DECIMAL(6,2), " +
                     " magType VARCHAR (50), " +
