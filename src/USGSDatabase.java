@@ -20,10 +20,8 @@ public class USGSDatabase {
 
 
         try (Connection conn = DriverManager.getConnection(connectionUrl)) {
-
-
-            //createDatabase(conn,"usgs");
-            runSql (conn, "drop TABLE earthquake_data");
+            
+//            runSql (conn, "drop TABLE earthquake_data");
 
             createTable(conn,"earthquake_data");
 
@@ -38,43 +36,6 @@ public class USGSDatabase {
             e.printStackTrace();
         }
     }
-    public static void showData(Connection conn,String tableName) {
-        java.sql.Statement stmt;
-
-
-
-        try {
-
-            stmt = conn.createStatement();
-            ResultSet rs= stmt.executeQuery("select * from " + tableName);
-            while(rs.next()) {
-                String time= rs.getString("time");
-                System.out.println(time);
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-
-    }
-    public static void createDatabase(Connection conn, String databaseName) throws SQLException{
-
-
-        String databaseExist = "select name from master.dbo.sysdatabases where ('[' name  ']' =" +  databaseName + "or name = " + databaseName + ")";
-
-        java.sql.Statement stmt = conn.createStatement();
-        String sql = "CREATE DATABASE " + databaseName;
-
-        stmt.executeUpdate(sql);
-        //ResultSet de = stmt.executeQuery(databaseExist);
-
-        System.out.println("Databse Created.");
-
-
-    }
-
     public static void createTable (Connection conn, String tableName ) {
         try {
             java.sql.Statement stmt = conn.createStatement();
@@ -132,65 +93,6 @@ public class USGSDatabase {
             System.out.println();
             e.printStackTrace();
         }
-
-    }
-    public static void readCSV1(Connection conn,String tableName, String csvFile) {
-
-
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(csvFile));
-            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
-                    .withIgnoreSurroundingSpaces().withNullString("")
-                    .withFirstRecordAsHeader()
-                    .withIgnoreHeaderCase()
-                    .withTrim());
-            final Map<String, Integer> headerMap = csvParser.getHeaderMap();
-            final List<String> labels = new ArrayList<>(headerMap.size());
-	        /*
-	        for (final String label : headerMap.keySet()) {
-	        	if(headerMap.get(label) <22) {
-	            System.out.println(label + " " + headerMap.get(label) );
-
-	        	}
-	        }
-	        */
-            for (CSVRecord csvRecord : csvParser) {
-
-
-                final StringBuffer sql1 = new StringBuffer("INSERT INTO earthquake_data (time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource) VALUES (");
-
-                final StringBuffer sql = new StringBuffer(sql1);
-                sql.append("\'"). append(csvRecord.get(0)).append("\',")
-                        .append("\'"). append(csvRecord.get(1)).append("\',")
-                        .append("\'"). append(csvRecord.get(2)).append("\',")
-                        .append(csvRecord.get(3)).append(",")
-                        .append(csvRecord.get(4)).append(",")
-                        .append("\'"). append(csvRecord.get(5)).append("\',")
-                        .append(csvRecord.get(6)).append(",")
-                        .append(csvRecord.get(7)).append(",")
-                        .append(csvRecord.get(8)).append(",")
-                        .append(csvRecord.get(9)).append(",")
-                        .append("\'"). append(csvRecord.get(10)).append("\',")
-                        .append("\'"). append(csvRecord.get(11)).append("\',")
-                        .append("\'"). append(csvRecord.get(12)).append("\',")
-                        .append("\'"). append(csvRecord.get(13)).append("\',")
-                        .append("\'"). append(csvRecord.get(14)).append("\',")
-                        .append(csvRecord.get(15)).append(",")
-                        .append(csvRecord.get(16)).append(",")
-                        .append(csvRecord.get(17)).append(",")
-                        .append(csvRecord.get(18)).append(",")
-                        .append("\'"). append(csvRecord.get(19)).append("\',")
-                        .append("\'"). append(csvRecord.get(20)).append("\',")
-                        .append("\'"). append(csvRecord.get(21)).append("\');");
-                System.out.println(sql.toString());
-                runSql(conn,sql.toString());
-            }
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
 
     }
     public static void loadData(Connection conn,String tableName, String csvFile) throws SQLException {
@@ -280,7 +182,5 @@ public class USGSDatabase {
 
 
     }
-
-
 
 }
