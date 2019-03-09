@@ -20,13 +20,13 @@ public class USGSDatabase {
 
 
         try (Connection conn = DriverManager.getConnection(connectionUrl)) {
-            
+
 //            runSql (conn, "drop TABLE earthquake_data");
 
             createTable(conn,"earthquake_data");
 
 //            loadData(conn,"earthquake_data", "S:\\Dev\\JAVA III\\Lab4\\2007-2017_large_quake.csv");
-            loadData(conn,"earthquake_data", "2007-2017_large_quake.csv");
+            loadData(conn, "2007-2017_large_quake.csv");
 
             conn.close();
 
@@ -95,7 +95,7 @@ public class USGSDatabase {
         }
 
     }
-    public static void loadData(Connection conn,String tableName, String csvFile) throws SQLException {
+    public static void loadData(Connection conn, String csvFile) throws SQLException {
 
 
         try {
